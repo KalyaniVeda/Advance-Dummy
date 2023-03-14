@@ -3,19 +3,24 @@ package practise;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-@Test
-public class MyTest {
-	
-	public void m1()
+
+public class Parameters {
+
+	@Test
+	public void method()
 	{
-		WebDriver driver = null;
+		WebDriver driver;
 		String browser = System.getProperty("browser");
 		String url = System.getProperty("url");
-		System.out.println(browser);
-		if(browser.equalsIgnoreCase("browser"))
+		
+		//System.out.println(browser);
+		//System.out.println(url);
+		
+		if(browser.equalsIgnoreCase("chrome")) 
 		{
 			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
@@ -25,7 +30,15 @@ public class MyTest {
 			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
 		}
+		else if(browser.equalsIgnoreCase("firefox"))
+		{
+			WebDriverManager.firefoxdriver().setup();
+		    driver = new FirefoxDriver();
+		}
+		else
+		{
+			driver = new ChromeDriver();
+		}
 		driver.get(url);
 	}
-
 }
